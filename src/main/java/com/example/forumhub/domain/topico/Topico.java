@@ -1,13 +1,9 @@
 package com.example.forumhub.domain.topico;
 
-import com.example.forumhub.domain.curso.Curso;
-import com.example.forumhub.domain.resposta.Resposta;
-import com.example.forumhub.domain.usuario.Usuario;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -15,7 +11,6 @@ import java.util.List;
 @Table(name = "topicos")
 @Entity(name = "Topico")
 @Getter
-@NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
 public class Topico {
@@ -28,6 +23,9 @@ public class Topico {
     private String autor;
     private String curso;
     private List<String> respostas;
+
+    public Topico() {
+    }
 
     public Topico(DadosCadastroTopico dados) {
         this.titulo = dados.titulo();
@@ -102,7 +100,18 @@ public class Topico {
         this.respostas = respostas;
     }
 
-    //    private Usuario autor;
-//    private Curso curso;
-//    private List<Resposta> respostas;
+    public void atualizarInformacoes(DadosAtualizacaoTopico dados) {
+        if (dados.titulo() != null) {
+            this.titulo = dados.titulo();
+        }
+        if (dados.mensagem() != null) {
+            this.mensagem = dados.mensagem();
+        }
+        if (dados.autor() != null) {
+            this.autor = dados.autor();
+        }
+        if (dados.curso() != null) {
+            this.curso = dados.curso();
+        }
+    }
 }
